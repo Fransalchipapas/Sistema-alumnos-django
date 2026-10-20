@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block titulo %}
+Listado de Cursos
+{% endblock titulo %}
+
+{% block content %}
+<div class="container-box">
+    <h2>Listar Cursos</h2>
+    <ul>
+        {% for curso in cursos %}
+            <li>
+                <span>n {{ curso.nombre }}</span>
+                <strong>Camada: {{ curso.camada }}</strong>
+            </li>
+        {% empty %}
+            <li>No hay cursos disponibles actualmente.</li>
+        {% endfor %}
+    </ul>
+   <a href= "{% url 'crear_curso' %}">  Crear un nuevo curso</a>
+</div>
+{% endblock body %
+<!-- eliminamos los {% block title %} {% block content %} -->

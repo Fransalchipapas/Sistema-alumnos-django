@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{titulo}}
+{% endblock title %}
+{% block body %}
+    <h1>{{titulo}}</h1>
+<span> {{mensaje}} </span>
+
+<ul>
+    {{% for producto in productos %}}
+    {{% inf producto.precio >50 %}}
+
+    <li>
+        <h3>Id: {{producto.id}} - Nombre: {{producto.nombre}}</h3>
+        <span>Precio: ${{producto.precio}}</span>
+    </li>
+    {{% endif %}}
+    {{% empty %}}
+    <h3>No hay productos disponibles</h3>
+    {{% endfor %}}
+</ul>
+{{% endblock body %}}
+
+

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+
+    <title>
+        {% block title %}
+            {{ titulo }}
+        {% endblock title %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
+</head>
+
+<body>
+
+<header>
+    <header>
+    <h1>{{ titulo }}</h1>
+    <span>{{ mensaje }}</span>
+
+    <nav style="display:flex; justify-content:space-between; align-items:center;">
+
+        <!-- Menú principal -->
+        <div>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'profesores' %}">Profesores</a>
+            <a href="{% url 'cursos' %}">Cursos</a>
+            <a href="{% url 'estudiantes' %}">Estudiantes</a>
+            <a href="{% url 'entregables' %}">Entregables</a>
+        </div>
+
+        <!-- Menú de autenticación -->
+        <div style="display:flex; gap:15px; align-items:center;">
+
+            {% if user.is_authenticated %}
+            <div class="navbar-user d-flex align-items-center">
+                <span class="me-2">Hola, {{ request.user.username }}</span>
+                {% if request.user.avatar and request.user.avatar.imagen %}
+                <img
+                        src="{{ request.user.avatar.imagen.url }}"
+                        alt="Avatar"
+                        style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;"
+                >
+                {% else %}
+                <img
+                        src="/static/images/default-avatar.png"
+                        alt="Avatar por defecto"
+                        style="width: 40px; height: 40px; border-radius: 50%;">
+                {% endif %}
+            <a href="{% url 'agregar_avatar' %}" class="btn btn-sm btn-outline-secondary ms-3">Cambiar Foto</a>
+
+            <!-- {% endif %} -->
+
+                <strong>👤 {{ user.username }}</strong>
+
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">
+                        🚪 Cerrar sesión
+                    </button>
+                </form>
+
+            {% else %}
+
+                <a href="{% url 'login' %}">
+                    🔑 Iniciar sesión
+                </a>
+
+                <a href="{% url 'registro' %}">
+                    📝 Registrarse
+                </a>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </nav>
+</header>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock content %}
+</main>
+
+</body>
+</html>

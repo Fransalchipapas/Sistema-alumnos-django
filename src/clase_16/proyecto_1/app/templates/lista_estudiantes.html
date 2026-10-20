@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Listado de Estudiantes
+{% endblock title %}
+
+{% block content %}
+
+<h1>Estudiantes</h1>
+
+<a href ="'crear_estudiante' %}">
+    Crear estudiante
+</a>
+
+
+<ul>
+    {% for estudiante in estudiantes %}
+        <li>
+            {{ estudiante.nombre }}
+            {{ estudiante.apellido }}
+
+            {% url 'editar_estudiante' estudiante.pk %}
+                Editar
+            </a>
+
+            {% url 'eliminar_estudiante' estudiante.pk %}
+                Eliminar
+            </a>
+        </li>
+    {% empty %}
+        <li>No hay estudiantes registrados</li>
+    {% endfor %}
+
+</ul>
+
+{% endblock content %}
