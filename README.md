@@ -88,6 +88,12 @@ Pegamos el archivo a la altura de manage.py
 
 ```text
     git init
+    git add . 
     git commit -m "primer commit"
+    creamos el repo y copiamos el link .git
+    git remote add origin https://............
+    git remote -v (get , push) #comprombamos
+    git branch -M main (a la altura donde tenemos el .venv, .gitingnore ...)
     
+    guardamos los cambios 
 ```
