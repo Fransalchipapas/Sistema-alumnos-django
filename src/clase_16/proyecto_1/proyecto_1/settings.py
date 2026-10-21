@@ -26,16 +26,18 @@ environ.Env.read_env(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('django-insecure-!ca4bu%2rk@!okpn$7b#2#otb2ayv#)ieqbtzkgshrg(a1yvdw') #el parámetro de env()es el nombre de la variable
+#el parámetro de env()es el nombre de la variable
+SECRET_KEY=env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+"""
 DATABASES={
     'default': env.db('DATABASE_URL')
 }
-
+"""
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,12 +52,17 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # MIDDLEWARE espera el resto de la configuracion de la session whitenoise ->
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'proyecto_1.urls'
@@ -77,10 +84,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'proyecto_1.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -88,13 +94,13 @@ DATABASES = {
 
     }
 }
-
-
+"""
 
 # Configuración dinámica de base de datos
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}",
+    #   default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}",
+        default=f"sqlite:///{BASE_DIR/ 'db.sqlite3'}",
         conn_max_age=600
     )
 }
@@ -137,7 +143,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/' error de sobre escritura
 
 
 # Email
@@ -156,7 +162,7 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 # Rutas para el manejo de archivos multimedia (Avatares)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/'
 
 
 

@@ -28,9 +28,10 @@ ENV PATH="/app/.venv/bin:$PATH" \
 EXPOSE 10000
 
 # Comando unificado de arranque: Busca manage.py, entra a su carpeta, corre migraciones, collectstatic y levanta gunicorn
-CMD MANAGE_PATH=$(find . -name "manage.py" | head -n 1) && \
-    if [ -z "$MANAGE_PATH" ]; then echo "ERROR: No se encontro manage.py"; exit 1; fi && \
+#CMD MANAGE_PATH=$(find . -name "manage.py" | head -n 1) && \ no lo necesitamos porque ya conocdemos la ubicacion de manage.py
+CMD if [ -z "$MANAGE_PATH" ]; then echo "ERROR: No se encontro manage.py"; exit 1; fi && \
     cd $(dirname "$MANAGE_PATH") && \
     python manage.py migrate --no-input && \
     python manage.py collectstatic --no-input && \
     exec gunicorn proyecto_1.wsgi:application --bind 0.0.0.0:10000
+    # exec ......... 10000 y EXPOSE cambiaran al adoptar el puerto del entorno segun instrucciones de RENDER

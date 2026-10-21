@@ -85,7 +85,7 @@ Actualizamos el .gitignore con .env + db.sqlite3
 Después adaptamos el archivo settings.py y configurar también DATABASES  | pasos_despliegue_render.pdf
 ## Pegamos el Dokerfile 
 Pegamos el archivo a la altura de manage.py
-
+## Subimos a Github
 ```text
     git init
     git add . 
@@ -95,5 +95,9 @@ Pegamos el archivo a la altura de manage.py
     git remote -v (get , push) #comprombamos
     git branch -M main (a la altura donde tenemos el .venv, .gitingnore ...)
     
-    guardamos los cambios 
+    guardamos los cambios: git add . -> git status -> git commit -m "borramos ...." -> git push 
 ```
+## CONSTRUIMOS UNA WEB 
+Editamos settings borrando y unificando el bloque DATABASES
+Eliminamos un duplicado de enlace estático 
+Terminamos de configurar WhiteNoise
